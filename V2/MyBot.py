@@ -9,7 +9,6 @@ while True:
     command_queue = []
     ships = game_map.get_me().all_ships()
     planets = game_map.all_planets()
-    big_ships = sorted(planets, key=lambda i: i.radius, reverse=True)
 
     for ship in ships:
         if ship.docking_status != ship.DockingStatus.UNDOCKED:
@@ -19,7 +18,7 @@ while True:
         entities_by_distance = game_map.nearby_entities_by_distance(ship)
         entities_by_distance = OrderedDict(sorted(entities_by_distance.items(), key=lambda t: t[0]))
 
-        closest_empty_planets = [entities_by_distance[distance][0] for distance in entities_by_distance if isinstance(entities_by_distance[distance][0], hlt.entity.Planet) and not entities_by_distance[distance][0].is_owned()]
+        # closest_empty_planets = [entities_by_distance[distance][0] for distance in entities_by_distance if isinstance(entities_by_distance[distance][0], hlt.entity.Planet) and not entities_by_distance[distance][0].is_owned()]
 
         my_ships = game_map.get_me().all_ships()
         closest_enemy_ships = [entities_by_distance[distance][0] for distance in entities_by_distance if isinstance(entities_by_distance[distance][0], hlt.entity.Ship) and entities_by_distance[distance][0] not in my_ships]
