@@ -6,7 +6,7 @@ import copy
 game = hlt.Game("Nugget")
 defense_radius = 14
 table = {}
-t = 0
+first_move = True
 
 def get_all_enemy_ships(game_map):
     enemy_ships = []
@@ -72,7 +72,7 @@ while True:
     planets = game_map.all_planets()
 
     # initialize ships
-    if t == 0:
+    if first_move:
         my_ships = game_map.get_me().all_ships()
         table[my_ships[0].id] = 'attack'
         table[my_ships[1].id] = 'protect'
@@ -163,7 +163,7 @@ while True:
                     ignore_ships=False)
         elif table[ship.id] == 'attack':
             command = ship.navigate(
-                ship.closest_point_to(target, min_distance=4),
+                ship.closest_point_to(target, min_distance=3),
                 game_map,
                 speed=int(hlt.constants.MAX_SPEED),
                 angular_step=2,
@@ -174,4 +174,4 @@ while True:
 
     # Send our set of commands to the Halite engine for this turn
     game.send_command_queue(command_queue)
-    t += 1
+    first_move = False

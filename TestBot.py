@@ -3,7 +3,7 @@ import logging
 import random
 import copy
 
-game = hlt.Game("Nugget")
+game = hlt.Game("Test")
 defense_radius = 14
 table = {}
 t = 0
